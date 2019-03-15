@@ -82,8 +82,10 @@ App Center Crashes provides callbacks for developers to perform additional actio
 
 ### <a name="process"></a> Processing crashes in JavaScript
 
-During `react-native link`, the SDK will ask whether or not to send crash reports automatically or process crashes in JavaScript. You need to answer
-to process in Javascript for any of the `Crashes.setListener` methods to work as expected.
+In order for your `Crash.setListener` methods to work as expected you need to check if your application configured properly.
+
+1. Open **ios/YourAppName/AppDelegate.m** and verify that you have `[AppCenterReactNativeCrashes register];` instead of `[AppCenterReactNativeCrashes registerWithAutomaticProcessing];`.
+2. Open **android/app/src/main/res/values/strings.xml** and verify that `appCenterAnalytics_whenToSendCrash` is set to `ASK_JAVASCRIPT`.
 
 All the different callbacks of the event listener are discussed one by one
 in this document, but you need to set one event listener that define all callbacks at once.
@@ -105,7 +107,7 @@ Crashes.setListener({
 ```
 
 > [!NOTE]
-> To use that feature you need to have answered **Processed in JavaScript by user** when executing `react-native link` for the Crash service configuration.
+> To use that feature you need to configure you application properly for the Crash service.
 > 
 > This feature is thus dependent on [Processing crashes in JavaScript](#process).
 
@@ -148,7 +150,7 @@ Crashes.notifyUserConfirmation(UserConfirmation.ALWAYS_SEND);
 ```
 
 > [!NOTE]
-> To use that feature you need to have answered **Processed in JavaScript by user** when executing `react-native link` for the Crash service configuration.
+> To use that feature you need to configure you application properly for the Crash service.
 > 
 > This feature is thus dependent on [Processing crashes in JavaScript](#process).
 
@@ -178,7 +180,7 @@ Crashes.setListener({
 All callbacks are optional. You don't have to provide all 3 methods in the event listener object, for example you can implement only `onBeforeSending`.
 
 > [!NOTE]
-> To use that feature you need to have answered **Processed in JavaScript by user** when executing `react-native link` for the Crash service configuration.
+> To use that feature you need to configure you application properly for the Crash service.
 > 
 > This feature is thus dependent on [Processing crashes in JavaScript](#process).
 
@@ -228,7 +230,7 @@ Crashes.setListener({
 ```
 
 > [!NOTE]
-> To use that feature you need to have answered **Processed in JavaScript by user** when executing `react-native link` for the Crash service configuration.
+> To use that feature you need to configure you application properly for the Crash service.
 > 
 > This feature is thus dependent on [Processing crashes in JavaScript](#process).
 > 

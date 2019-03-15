@@ -83,13 +83,10 @@ This function returns a promise that resolves to a `boolean`.
 
 ## Wait for JS to enable App Center Analytics
 
-If you wish to collect analytics information for your app users but want to get user permission first, you have the option to not enable analytics on startup, but wait until the right time and enable it in JavaScript instead. In that case, during installation, you should select `Enable in JavaScript` instead of `Enable Automatically` during `react-native link`.
+If you wish to collect analytics information for your app users but want to get user permission first, you have the option to not enable analytics on startup, but wait until the right time and enable it in JavaScript instead.
 
-```
-For the [platform] app, should user tracking be enabled automatically ? (Use arrow keys)
-          Enable Automatically
-        > Enable in JavaScript
-```
+1. Open **ios/YourAppName/AppDelegate.m** and replace `[AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];` with `[AppCenterReactNativeAnalytics registerWithInitiallyEnabled:false];`.
+2. Open **android/app/src/main/res/values/strings.xml** and replace `<string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true">ALWAYS_SEND</string>` with `<string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true">ENABLE_IN_JS</string>`.
 
 This means that for any information to be sent to App Center (even basic session information), you must first enable App Center Analytics inside the app by adding the following line to their code.
 
